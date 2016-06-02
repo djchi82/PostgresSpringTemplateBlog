@@ -9,6 +9,21 @@ public class Report {
     private Long id;
     private String name;
 
+    /** Simple class constructor */
+    public Report() {
+        super();
+    }
+
+    /**
+     * Class constructor
+     * @param name Name
+     * @param reportParameters json as a string
+     */
+    public Report(String name, String reportParameters) {
+        this.name = name;
+        this.reportParameters = reportParameters;
+    }
+
     public String getReportParameters() {
         return reportParameters;
     }
@@ -31,5 +46,14 @@ public class Report {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Report{" +
+                "reportParameters='" + reportParameters + '\'' +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

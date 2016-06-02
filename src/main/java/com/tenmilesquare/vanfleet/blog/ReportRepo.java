@@ -34,4 +34,31 @@ public class ReportRepo {
         //Assume that the fist element is the one we are seeking.
         return reports.get(0);
     }
+
+    private final static String INSERT_SQL_CAST_EXC = "INSERT INTO jsontest.report (name, parameters) VALUES (:name, :parameters) RETURNING report_id";
+    /**
+     * Insert report will throw Casting exception if JSON is supplied
+     * @param report the report
+     * @return the database id.
+     */
+    public Long insertReportCastException(Report report){
+        Map<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put("name", report.getName());
+        parameters.put("parameters", report.getReportParameters());
+        return jdbcTemplate.queryForObject(INSERT_SQL_CAST_EXC, parameters, Long.class);
+    }
+
+
+    private final static String INSERT_SQL_CASTED = "INSERT INTO jsontest.report (name, parameters) VALUES (:name, cast(:parameters AS JSON)) RETURNING report_id";
+    /**
+     * Insert report. Will work, because we have casted the string to json
+     * @param report the report
+     * @return the database id.
+     */
+    public Long insertReportCasted(Report report){
+        Map<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put("name", report.getName());
+        parameters.put("parameters", report.getReportParameters());
+        return jdbcTemplate.queryForObject(INSERT_SQL_CASTED, parameters, Long.class);
+    }
 }

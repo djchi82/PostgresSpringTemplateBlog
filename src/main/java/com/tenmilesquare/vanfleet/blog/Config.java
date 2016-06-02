@@ -24,7 +24,7 @@ public class Config {
     public DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/json");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/jsontest");
         dataSource.setUsername("postgres");
         dataSource.setPassword("postgres");
         dataSource.setValidationQuery("SELECT version()");
